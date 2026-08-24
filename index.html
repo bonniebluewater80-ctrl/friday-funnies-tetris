@@ -357,13 +357,15 @@
 const isMobile = ('ontouchstart' in window) || window.innerWidth < 900;
 
 function calcCell() {
-  // Measured on phone: header~40 + stats~40 + btn~36 + touch~108 + gaps~24 + pad~12 = ~260
-  const reserved = isMobile ? 240 : 200;
-  const availH = window.innerHeight - reserved;
-  const availW = isMobile ? window.innerWidth - 16 : window.innerWidth - 180;
-  const byH = Math.floor(availH / 20);
-  const byW = Math.floor(availW / 10);
-  return Math.max(14, Math.min(32, Math.min(byH, byW)));
+  if (isMobile) {
+    // Give the board 68% of viewport height — reliable across all phone sizes
+    const byH = Math.floor((window.innerHeight * 0.68) / 20);
+    const byW = Math.floor((window.innerWidth - 16) / 10);
+    return Math.max(14, Math.min(36, Math.min(byH, byW)));
+  }
+  const byH = Math.floor((window.innerHeight - 200) / 20);
+  const byW = Math.floor((window.innerWidth - 180) / 10);
+  return Math.max(18, Math.min(36, Math.min(byH, byW)));
 }
 
 const COLS = 10, ROWS = 20;
