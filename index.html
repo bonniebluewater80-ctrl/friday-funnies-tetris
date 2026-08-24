@@ -292,6 +292,7 @@
 </header>
 
 <!-- Stats bar: mobile + desktop -->
+<div id="dbg" style="font-size:10px;color:#B52020;text-align:center;width:100%;flex-shrink:0">loading...</div>
 <div class="stats-bar" id="statsBar">
   <div class="stat">
     <span class="stat-label">Score</span>
@@ -354,10 +355,13 @@
 const isMobile = ('ontouchstart' in window) || window.innerWidth < 900;
 
 function calcCell() {
-  // Always use percentage — works on any device without detection tricks
-  const byH = Math.floor((window.innerHeight * 0.68) / 20);
+  const byH = Math.floor((window.innerHeight * 0.80) / 20);
   const byW = Math.floor((window.innerWidth - 16) / 10);
-  return Math.max(14, Math.min(36, Math.min(byH, byW)));
+  const cell = Math.max(14, Math.min(40, Math.min(byH, byW)));
+  // Debug: show dimensions
+  const dbg = document.getElementById('dbg');
+  if (dbg) dbg.textContent = 'v5 | h:' + window.innerHeight + ' w:' + window.innerWidth + ' cell:' + cell;
+  return cell;
 }
 
 const COLS = 10, ROWS = 20;
