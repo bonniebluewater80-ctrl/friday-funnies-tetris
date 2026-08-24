@@ -356,12 +356,20 @@
 const isMobile = navigator.maxTouchPoints > 0 || window.innerWidth < 900;
 
 function calcCell() {
-  const byH = Math.floor((window.innerHeight * 0.80) / 20);
-  const byW = Math.floor((window.innerWidth - 16) / 10);
-  const cell = Math.max(14, Math.min(40, Math.min(byH, byW)));
-  // Debug: show dimensions
+  let cell;
+  if (isMobile) {
+    // Phone h=775 w=411: reserve 300px for all chrome, board gets the rest
+    const byH = Math.floor((window.innerHeight - 300) / 20);
+    const byW = Math.floor((window.innerWidth - 16) / 10);
+    cell = Math.max(14, Math.min(30, Math.min(byH, byW)));
+  } else {
+    // Desktop: cap at 22 so it doesn't dominate
+    const byH = Math.floor((window.innerHeight - 220) / 20);
+    const byW = Math.floor((window.innerWidth - 180) / 10);
+    cell = Math.max(18, Math.min(22, Math.min(byH, byW)));
+  }
   const dbg = document.getElementById('dbg');
-  if (dbg) dbg.textContent = 'v5 | h:' + window.innerHeight + ' w:' + window.innerWidth + ' cell:' + cell;
+  if (dbg) dbg.textContent = 'v7 | h:' + window.innerHeight + ' w:' + window.innerWidth + ' cell:' + cell;
   return cell;
 }
 
