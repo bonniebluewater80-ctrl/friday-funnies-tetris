@@ -357,13 +357,13 @@
 const isMobile = ('ontouchstart' in window) || window.innerWidth < 900;
 
 function calcCell() {
-  // header~46 + stats~44 + btns~38 + touch~110 + gaps~36 + pad~12 = ~286
-  const reserved = isMobile ? 286 : 200;
+  // Measured on phone: header~40 + stats~40 + btn~36 + touch~108 + gaps~24 + pad~12 = ~260
+  const reserved = isMobile ? 240 : 200;
   const availH = window.innerHeight - reserved;
-  const availW = isMobile ? window.innerWidth - 20 : window.innerWidth - 180;
+  const availW = isMobile ? window.innerWidth - 16 : window.innerWidth - 180;
   const byH = Math.floor(availH / 20);
   const byW = Math.floor(availW / 10);
-  return Math.max(14, Math.min(30, Math.min(byH, byW)));
+  return Math.max(14, Math.min(32, Math.min(byH, byW)));
 }
 
 const COLS = 10, ROWS = 20;
