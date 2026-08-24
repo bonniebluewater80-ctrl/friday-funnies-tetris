@@ -250,7 +250,7 @@
 
   /* ── Touch controls ── */
   .touch-controls {
-    display: none; /* shown on mobile via JS */
+    display: none; /* shown on touch devices via JS or CSS */
     flex-direction: column;
     align-items: center;
     gap: 3px;
@@ -278,6 +278,12 @@
   }
   .tbtn:active { background: var(--panel-surface-alt); }
   .tbtn-wide { width: 120px; font-size: 0.9rem; font-family: 'Permanent Marker', cursive; }
+
+  /* Force touch controls on narrow screens regardless of JS */
+  @media (max-width: 900px), (pointer: coarse) {
+    .touch-controls { display: flex !important; }
+    .side-panel { display: none !important; }
+  }
 </style>
 
 <header class="header">
@@ -348,7 +354,7 @@
 'use strict';
 
 // ── Responsive sizing ─────────────────────────
-const isMobile = window.innerWidth < 768;
+const isMobile = ('ontouchstart' in window) || window.innerWidth < 900;
 
 function calcCell() {
   // header~46 + stats~44 + btns~38 + touch~110 + gaps~36 + pad~12 = ~286
