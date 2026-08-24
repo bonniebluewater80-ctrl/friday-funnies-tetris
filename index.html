@@ -147,10 +147,7 @@
 
   /* Side panel — desktop only */
   .side-panel {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    width: 120px;
+    display: none;
   }
 
   .pbox {
@@ -250,7 +247,7 @@
 
   /* ── Touch controls ── */
   .touch-controls {
-    display: none; /* shown on touch devices via JS or CSS */
+    display: flex;
     flex-direction: column;
     align-items: center;
     gap: 3px;
@@ -357,15 +354,10 @@
 const isMobile = ('ontouchstart' in window) || window.innerWidth < 900;
 
 function calcCell() {
-  if (isMobile) {
-    // Give the board 68% of viewport height — reliable across all phone sizes
-    const byH = Math.floor((window.innerHeight * 0.68) / 20);
-    const byW = Math.floor((window.innerWidth - 16) / 10);
-    return Math.max(14, Math.min(36, Math.min(byH, byW)));
-  }
-  const byH = Math.floor((window.innerHeight - 200) / 20);
-  const byW = Math.floor((window.innerWidth - 180) / 10);
-  return Math.max(18, Math.min(36, Math.min(byH, byW)));
+  // Always use percentage — works on any device without detection tricks
+  const byH = Math.floor((window.innerHeight * 0.68) / 20);
+  const byW = Math.floor((window.innerWidth - 16) / 10);
+  return Math.max(14, Math.min(36, Math.min(byH, byW)));
 }
 
 const COLS = 10, ROWS = 20;
