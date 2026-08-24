@@ -293,7 +293,6 @@
 </header>
 
 <!-- Stats bar: mobile + desktop -->
-<div id="dbg" style="font-size:10px;color:#B52020;text-align:center;width:100%;flex-shrink:0">loading...</div>
 <div class="stats-bar" id="statsBar">
   <div class="stat">
     <span class="stat-label">Score</span>
@@ -368,8 +367,6 @@ function calcCell() {
     const byW = Math.floor((window.innerWidth - 180) / 10);
     cell = Math.max(18, Math.min(22, Math.min(byH, byW)));
   }
-  const dbg = document.getElementById('dbg');
-  if (dbg) dbg.textContent = 'v7 | h:' + window.innerHeight + ' w:' + window.innerWidth + ' cell:' + cell;
   return cell;
 }
 
