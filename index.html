@@ -29,10 +29,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     padding: 6px 10px 6px;
     -webkit-font-smoothing: antialiased;
-    gap: 4px;
+    gap: 6px;
   }
 
   /* ── Header ── */
@@ -348,11 +348,11 @@
 'use strict';
 
 // ── Responsive sizing ─────────────────────────
-const isMobile = window.innerWidth < 600;
+const isMobile = window.innerWidth < 768;
 
 function calcCell() {
-  // header~46 + stats~42 + btns~36 + touch~108 + gaps~30 + pad~16 = ~278
-  const reserved = isMobile ? 278 : 200;
+  // header~46 + stats~44 + btns~38 + touch~110 + gaps~36 + pad~12 = ~286
+  const reserved = isMobile ? 286 : 200;
   const availH = window.innerHeight - reserved;
   const availW = isMobile ? window.innerWidth - 20 : window.innerWidth - 180;
   const byH = Math.floor(availH / 20);
